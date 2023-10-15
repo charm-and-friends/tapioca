@@ -4,15 +4,15 @@ import (
 	"io"
 	"time"
 
-	"github.com/charmbracelet/bubbles/progress"
+	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/esdandreu/sunkentea"
 	"github.com/spf13/cobra"
 )
 
-// progressCmd represents the progress command
-var progressCmd = &cobra.Command{
-	Use:   "progress",
+// computeCmd represents the progress command
+var computeCmd = &cobra.Command{
+	Use:   "compute",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
@@ -23,52 +23,53 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Create progress bar and set the command output
 		defer func(w io.Writer) { cmd.SetOut(w) }(cmd.OutOrStdout())
-		pbar, w := sunkentea.NewProgram(&model{
-			progress.New(progress.WithScaledGradient("#FF7CCB", "#FDFF8C")),
-		})
+		program, w := sunkentea.NewProgram(&model{spinner.New()})
 		cmd.SetOut(w)
 
 		// Start the progress bar
 		go func() {
-			if _, err := pbar.Run(); err != nil {
+			if _, err := program.Run(); err != nil {
 				cmd.PrintErr("Oh no!", err)
 			}
 		}()
-		defer pbar.Quit()
+		defer func() {
+			program.Quit() // Sends a Quit signal
+			program.Wait() // Waits until everything has been printed
+		}()
 
 		for i := 0; i <= 100; i++ {
 			time.Sleep(20 * time.Millisecond)
-			cmd.Println("DEBUG", i)
-			pbar.Send(float64(i) / 100)
+			cmd.Println("Computed:", i)
 		}
-		cmd.Println("progress called")
+		cmd.Println("finished computing")
 	},
 }
 
 type model struct {
-	progress progress.Model
+	spinner.Model
 }
 
 func (m model) Init() tea.Cmd {
-	return nil
+	return m.Model.Tick
 }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
-		return m, tea.Quit
-	case float64:
-		m.progress.SetPercent(msg)
-		return m, nil
-	default:
-		return m, nil
+		switch msg.Type {
+		case tea.KeyCtrlC:
+			return m, tea.Quit
+		}
 	}
+	var cmd tea.Cmd
+	m.Model, cmd = m.Model.Update(msg)
+	return m, cmd
 }
 
 func (m model) View() string {
-	return m.progress.ViewAs(m.progress.Percent())
+	return m.Model.View()
 }
 
 func init() {
-	rootCmd.AddCommand(progressCmd)
+	rootCmd.AddCommand(computeCmd)
 }

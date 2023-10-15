@@ -1,4 +1,3 @@
-# go-float-pbar
-Floating progress bar compatible with any loggers that you might use
+# sprinkles
 
-This package is des
+Sprinkle some dynamic elements with bubbletea.

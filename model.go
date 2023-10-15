@@ -11,6 +11,8 @@ type Model struct {
 	wrapped tea.Model
 }
 
+// TODO(GIA) Write should also update
+
 func WrapModel(model tea.Model) *Model {
 	return &Model{wrapped: model}
 }
