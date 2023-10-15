@@ -1,7 +1,9 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"io"
 	"os"
 	"time"
 
@@ -11,18 +13,26 @@ import (
 )
 
 func main() {
+	var wrap bool
+	flag.BoolVar(&wrap, "wrap", true, "Use sunkentea to wrap the progress bar")
+	flag.Parse()
 
-	sunkenmodel := sunkentea.WrapModel(&model{
+	var model tea.Model = &Model{
 		progress.New(progress.WithScaledGradient("#FF7CCB", "#FDFF8C")),
-		true,
-	})
+	}
+	var output io.Writer = os.Stdout
+	if wrap {
+		wrapped := sunkentea.WrapModel(model)
+		model = wrapped
+		output = wrapped
+	}
 
-	program := tea.NewProgram(sunkenmodel)
+	program := tea.NewProgram(model)
 
 	go func() {
 		for i := 0; i <= 100; i++ {
 			time.Sleep(20 * time.Millisecond)
-			fmt.Fprintln(sunkenmodel, "DEBUG", i)
+			fmt.Fprintln(output, "DEBUG", i)
 			program.Send(float64(i) / 100)
 		}
 		program.Quit()
@@ -35,16 +45,15 @@ func main() {
 	}
 }
 
-type model struct {
+type Model struct {
 	progress progress.Model
-	show     bool
 }
 
-func (m model) Init() tea.Cmd {
+func (m Model) Init() tea.Cmd {
 	return nil
 }
 
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		return m, tea.Quit
@@ -56,6 +65,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 }
 
-func (m model) View() string {
+func (m Model) View() string {
 	return m.progress.ViewAs(m.progress.Percent())
 }
