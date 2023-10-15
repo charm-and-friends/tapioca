@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	sunkenmodel := sunkentea.NewSunkenModel(&model{
+	sunkenmodel := sunkentea.WrapModel(&model{
 		progress.New(progress.WithScaledGradient("#FF7CCB", "#FDFF8C")),
 		true,
 	})
@@ -22,8 +22,7 @@ func main() {
 	go func() {
 		for i := 0; i <= 100; i++ {
 			time.Sleep(20 * time.Millisecond)
-			program.Send(fmt.Sprintln("DEBUG", i))
-			// fmt.Fprintln(sunkenmodel, "DEBUG", i)
+			fmt.Fprintln(sunkenmodel, "DEBUG", i)
 			program.Send(float64(i) / 100)
 		}
 		program.Quit()

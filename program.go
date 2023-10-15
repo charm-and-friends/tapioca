@@ -7,6 +7,7 @@ import (
 	"github.com/muesli/termenv"
 )
 
+// TODO(GIA) Wrap writer in a way that now it can be used safely
 func NewProgram(
 	w io.Writer, model tea.Model, opts ...tea.ProgramOption,
 ) (*tea.Program, io.Writer) {
