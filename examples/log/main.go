@@ -7,17 +7,17 @@ import (
 
 	"github.com/charmbracelet/bubbles/progress"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/esdandreu/sunkentea"
+	"github.com/esdandreu/glitter"
 )
 
 var logger *log.Logger = log.Default()
 
 func main() {
 	var without bool
-	flag.BoolVar(&without, "without", false, "Do not use sunkentea")
+	flag.BoolVar(&without, "without", false, "Do not use glitter")
 	flag.Parse()
 
-	program, writer := sunkentea.NewProgram(model{progress.New()})
+	program, writer := glitter.NewProgram(model{progress.New()})
 
 	if !without {
 		// Use a logger that works together with bubbletea

@@ -6,7 +6,7 @@ import (
 
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/esdandreu/sunkentea"
+	"github.com/esdandreu/glitter"
 	"github.com/spf13/cobra"
 )
 
@@ -23,7 +23,7 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Create progress bar and set the command output
 		defer func(w io.Writer) { cmd.SetOut(w) }(cmd.OutOrStdout())
-		program, w := sunkentea.NewProgram(&model{spinner.New()})
+		program, w := glitter.NewProgram(&model{spinner.New()})
 		cmd.SetOut(w)
 
 		// Start the progress bar

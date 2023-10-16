@@ -1,4 +1,4 @@
-package sunkentea
+package glitter
 
 import (
 	"strings"

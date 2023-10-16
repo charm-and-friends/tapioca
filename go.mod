@@ -1,4 +1,4 @@
-module github.com/esdandreu/sunkentea
+module github.com/esdandreu/glitter
 
 go 1.20
 

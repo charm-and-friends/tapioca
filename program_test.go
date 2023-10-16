@@ -1,4 +1,4 @@
-package sunkentea_test
+package glitter_test
 
 import (
 	"bytes"
@@ -9,14 +9,14 @@ import (
 
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/esdandreu/sunkentea"
+	"github.com/esdandreu/glitter"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestProgram(t *testing.T) {
 	s := model{spinner.New()}
 	var buffer bytes.Buffer
-	program, writer := sunkentea.NewProgram(s, tea.WithOutput(&buffer))
+	program, writer := glitter.NewProgram(s, tea.WithOutput(&buffer))
 	// Start the program and log concurrently
 	n := 100
 	go func() {
