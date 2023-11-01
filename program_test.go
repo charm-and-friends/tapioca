@@ -7,21 +7,28 @@ import (
 	"testing"
 	"time"
 
-	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/esdandreu/glitter"
 	"github.com/stretchr/testify/assert"
 )
 
+func ExampleProgram() {
+	program := glitter.NewProgram(glitter.NewSpinner()).GoRun()
+	defer program.QuitAndWait()
+
+	for i := 0; i < 10; i++ {
+		time.Sleep(1 * time.Millisecond)
+		fmt.Fprintln(program, i, "milliseconds")
+	}
+}
+
 func TestProgram(t *testing.T) {
-	s := model{spinner.New()}
 	var buffer bytes.Buffer
-	program := glitter.NewProgram(s, tea.WithOutput(&buffer))
+	program := glitter.NewProgram(glitter.NewSpinner(), tea.WithOutput(&buffer))
 	// Start the program and log concurrently
 	n := 100
 	go func() {
 		for i := 0; i < n; i++ {
-			time.Sleep(1 * time.Millisecond)
 			fmt.Fprintln(program, "DEBUG", i)
 		}
 		program.Quit()
@@ -34,29 +41,4 @@ func TestProgram(t *testing.T) {
 	t.Log(buffer.String())
 	lines := strings.Split(buffer.String(), "\n")
 	assert.Equal(t, n+1, len(lines))
-}
-
-type model struct {
-	spinner.Model
-}
-
-func (m model) Init() tea.Cmd {
-	return m.Model.Tick
-}
-
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyMsg:
-		switch msg.Type {
-		case tea.KeyCtrlC:
-			return m, tea.Quit
-		}
-	}
-	var cmd tea.Cmd
-	m.Model, cmd = m.Model.Update(msg)
-	return m, cmd
-}
-
-func (m model) View() string {
-	return m.Model.View()
 }

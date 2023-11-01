@@ -4,8 +4,6 @@ import (
 	"io"
 	"time"
 
-	"github.com/charmbracelet/bubbles/spinner"
-	tea "github.com/charmbracelet/bubbletea"
 	"github.com/esdandreu/glitter"
 	"github.com/spf13/cobra"
 )
@@ -21,53 +19,21 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Create progress bar and set the command output
+		// Create and run a spinner in the background
+		program := glitter.NewProgram(glitter.NewSpinner()).GoRun()
+		defer program.QuitAndWait() // Quit and wait until printing finishes
+
+		// Set the command output to the program
 		defer func(w io.Writer) { cmd.SetOut(w) }(cmd.OutOrStdout())
-		program := glitter.NewProgram(&model{spinner.New()})
 		cmd.SetOut(program)
 
-		// Start the progress bar
-		go func() {
-			if _, err := program.Run(); err != nil {
-				cmd.PrintErr("Oh no!", err)
-			}
-		}()
-		defer func() {
-			program.Quit() // Sends a Quit signal
-			program.Wait() // Waits until everything has been printed
-		}()
-
-		for i := 0; i <= 100; i++ {
+		N := 100
+		for i := 0; i <= N; i++ {
 			time.Sleep(20 * time.Millisecond)
-			cmd.Println("Computed:", i)
+			cmd.Println(i, "/", N)
 		}
 		cmd.Println("finished computing")
 	},
-}
-
-type model struct {
-	spinner.Model
-}
-
-func (m model) Init() tea.Cmd {
-	return m.Model.Tick
-}
-
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyMsg:
-		switch msg.Type {
-		case tea.KeyCtrlC:
-			return m, tea.Quit
-		}
-	}
-	var cmd tea.Cmd
-	m.Model, cmd = m.Model.Update(msg)
-	return m, cmd
-}
-
-func (m model) View() string {
-	return m.Model.View()
 }
 
 func init() {

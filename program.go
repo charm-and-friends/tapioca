@@ -15,21 +15,21 @@ type Program struct {
 	mutex sync.Mutex
 }
 
-func (w *Program) Write(p []byte) (int, error) {
+func (program *Program) Write(p []byte) (int, error) {
 	// Buffer everything
-	n, err := w.buf.Write(p)
+	n, err := program.buf.Write(p)
 	if err != nil {
 		return n, err
 	}
 
 	// Write when a new line is found
-	w.mutex.Lock()
-	defer w.mutex.Unlock()
+	program.mutex.Lock()
+	defer program.mutex.Unlock()
 	for {
-		line, err := w.buf.ReadBytes('\n')
+		line, err := program.buf.ReadBytes('\n')
 		if err == io.EOF {
 			// Put back the read data if newline not found.
-			w.buf.Write(line)
+			program.buf.Write(line)
 			return n, nil
 		}
 
@@ -38,8 +38,23 @@ func (w *Program) Write(p []byte) (int, error) {
 		}
 
 		// Print everything but the \n
-		w.Println(string(line[:len(line)-1]))
+		program.Println(string(line[:len(line)-1]))
 	}
+}
+
+func (program *Program) GoRun(afterRun ...func(tea.Model, error)) *Program {
+	go func() {
+		m, err := program.Run()
+		for _, fn := range afterRun {
+			fn(m, err)
+		}
+	}()
+	return program
+}
+
+func (program *Program) QuitAndWait() {
+	program.Quit()
+	program.Wait()
 }
 
 func NewProgram(model tea.Model, opts ...tea.ProgramOption) *Program {
