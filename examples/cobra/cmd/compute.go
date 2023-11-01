@@ -23,8 +23,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Create progress bar and set the command output
 		defer func(w io.Writer) { cmd.SetOut(w) }(cmd.OutOrStdout())
-		program, w := glitter.NewProgram(&model{spinner.New()})
-		cmd.SetOut(w)
+		program := glitter.NewProgram(&model{spinner.New()})
+		cmd.SetOut(program)
 
 		// Start the progress bar
 		go func() {

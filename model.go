@@ -1,32 +1,34 @@
 package glitter
 
 import (
-	"strings"
-
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-type Model struct {
-	strings.Builder
-	wrapped tea.Model
+type ModelWrapper struct {
+	tea.Model
 }
 
-// TODO(GIA) Write should also update
-
-func WrapModel(model tea.Model) *Model {
-	return &Model{wrapped: model}
+func (m *ModelWrapper) Init() tea.Cmd {
+	return m.Model.Init()
 }
 
-func (m *Model) Init() tea.Cmd {
-	return m.wrapped.Init()
-}
-
-func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m *ModelWrapper) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	switch msg := msg.(type) {
+	case tea.KeyMsg:
+		switch msg.Type {
+		case tea.KeyCtrlC:
+			return m, tea.Quit
+		}
+	}
 	var cmd tea.Cmd
-	m.wrapped, cmd = m.wrapped.Update(msg)
+	m.Model, cmd = m.Model.Update(msg)
 	return m, cmd
 }
 
-func (m *Model) View() string {
-	return m.String() + m.wrapped.View()
+func (m *ModelWrapper) View() string {
+	return m.Model.View()
+}
+
+func WrapModel(model tea.Model) *ModelWrapper {
+	return &ModelWrapper{model}
 }

@@ -16,13 +16,13 @@ import (
 func TestProgram(t *testing.T) {
 	s := model{spinner.New()}
 	var buffer bytes.Buffer
-	program, writer := glitter.NewProgram(s, tea.WithOutput(&buffer))
+	program := glitter.NewProgram(s, tea.WithOutput(&buffer))
 	// Start the program and log concurrently
 	n := 100
 	go func() {
 		for i := 0; i < n; i++ {
 			time.Sleep(1 * time.Millisecond)
-			fmt.Fprintln(writer, "DEBUG", i)
+			fmt.Fprintln(program, "DEBUG", i)
 		}
 		program.Quit()
 	}()

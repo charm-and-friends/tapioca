@@ -13,16 +13,16 @@ import (
 var logger *log.Logger = log.Default()
 
 func main() {
-	var without bool
-	flag.BoolVar(&without, "without", false, "Do not use glitter")
+	var noGlitter bool
+	flag.BoolVar(&noGlitter, "no-glitter", false, "Do not use glitter")
 	flag.Parse()
 
-	program, writer := glitter.NewProgram(model{progress.New()})
+	program := glitter.NewProgram(model{progress.New()})
 
-	if !without {
+	if !noGlitter {
 		// Use a logger that works together with bubbletea
 		defer func(l *log.Logger) { logger = l }(logger)
-		logger = log.New(writer, "", log.LstdFlags)
+		logger = log.New(program, "", log.LstdFlags)
 	}
 
 	// Start the progress bar
