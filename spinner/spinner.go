@@ -1,8 +1,9 @@
-package glitter
+package spinner
 
 import (
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/esdandreu/glitter"
 )
 
 // Wraps bubbles/spinner.Spinner in a way that it implements tea.Spinner interface.
@@ -25,6 +26,6 @@ func (m Spinner) View() string {
 }
 
 // Creates a new Spinner tea.Model.
-func NewSpinner(opts ...spinner.Option) tea.Model {
-	return WrapModel(&Spinner{spinner.New(opts...)})
+func New(opts ...spinner.Option) tea.Model {
+	return glitter.WrapModel(&Spinner{spinner.New(opts...)})
 }

@@ -9,11 +9,12 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/esdandreu/glitter"
+	"github.com/esdandreu/glitter/spinner"
 	"github.com/stretchr/testify/assert"
 )
 
 func ExampleProgram() {
-	program := glitter.NewProgram(glitter.NewSpinner()).GoRun()
+	program := glitter.NewProgram(spinner.New()).GoRun()
 	defer program.QuitAndWait()
 
 	for i := 0; i < 10; i++ {
@@ -24,7 +25,7 @@ func ExampleProgram() {
 
 func TestProgram(t *testing.T) {
 	var buffer bytes.Buffer
-	program := glitter.NewProgram(glitter.NewSpinner(), tea.WithOutput(&buffer))
+	program := glitter.NewProgram(spinner.New(), tea.WithOutput(&buffer))
 	// Start the program and log concurrently
 	n := 100
 	go func() {

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/esdandreu/glitter"
+	"github.com/esdandreu/glitter/spinner"
 	"github.com/spf13/cobra"
 )
 
@@ -20,7 +21,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Create and run a spinner in the background
-		program := glitter.NewProgram(glitter.NewSpinner()).GoRun()
+		program := glitter.NewProgram(spinner.NewSpinner()).GoRun()
 		defer program.QuitAndWait() // Quit and wait until printing finishes
 
 		// Set the command output to the program
