@@ -30,14 +30,39 @@ defer program.QuitAndWait()
 ## Examples
 
 ### Cobra & Spinner
-Printing while showing a spinner in Cobra
+Long running commands often require logging some intermediate information to
+let users know that the program is running as expected. However, printing a
+bunch of debug logs does not look nice in an application. Spinners can make
+your application more user friendly and `glitter` integrates them painlessly
+with your `cobra` application.
 
-TODO Simulate connection retries
+[connect.go](./examples/cobra/cmd/connect.go)
+```golang
+var connectCmd = &cobra.Command{
+	[...]
+	Run: func(cmd *cobra.Command, args []string) {
+        // Create and run a spinner in the background
+		program := glitter.NewProgram(spinner.New()).GoRun()
+		defer program.QuitAndWait() // Quit when command ends
+
+		// Set the command output to the program
+		defer func(w io.Writer) { cmd.SetOut(w) }(cmd.OutOrStdout())
+		cmd.SetOut(program)
+        [...]
+    }
+}
+```
 
 ![cobra](./docs/cobra-spinner.gif)
 
 ### Log & Progress
 Log info
+
+![log](./docs/log-progress.gif)
+
+### TODO Example with huh? prompt and Charm's Log
+
+### TODO Example with zerolog
 
 ### Charm's Log & Prompt
 
@@ -47,7 +72,6 @@ pre-defined models for fast prototyping:
 
 - TODO: Progress with title and ETA.
 - TODO: Spinner with title.
-- TODO: ~Prompt~. Use huh?
 
 These models are usable out of the box and quit after pressing usual quit key
 combinations (`ctrl+C`/`cmd+C`). They are intended to cover basic dynamic

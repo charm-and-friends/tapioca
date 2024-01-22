@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/esdandreu/glitter"
+	"github.com/esdandreu/glitter/progress"
 )
 
 var logger *log.Logger = log.Default()
@@ -16,7 +17,7 @@ func main() {
 	flag.Parse()
 
 	// Create and start the progress bar
-	program := glitter.NewProgram(glitter.NewProgress()).GoRun()
+	program := glitter.NewProgram(progress.New()).GoRun()
 	defer program.QuitAndWait()
 
 	if !noGlitter {

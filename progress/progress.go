@@ -1,8 +1,9 @@
-package glitter
+package progress
 
 import (
 	"github.com/charmbracelet/bubbles/progress"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/esdandreu/glitter"
 )
 
 type Progress struct {
@@ -31,6 +32,6 @@ func (m Progress) View() string {
 }
 
 // Creates a new Progress tea.Model.
-func NewProgress(opts ...progress.Option) tea.Model {
-	return WrapModel(&Progress{progress.New(opts...)})
+func New(opts ...progress.Option) tea.Model {
+	return glitter.WrapModel(&Progress{progress.New(opts...)})
 }
