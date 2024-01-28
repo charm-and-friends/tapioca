@@ -36,7 +36,7 @@ bunch of debug logs does not look nice in an application. Spinners can make
 your application more user friendly and `glitter` integrates them painlessly
 with your `cobra` application.
 
-[connect.go](./examples/cobra/cmd/connect.go)
+[./examples/cobra/cmd/connect.go](./examples/cobra/cmd/connect.go)
 ```golang
 var connectCmd = &cobra.Command{
 	[...]
@@ -56,9 +56,40 @@ var connectCmd = &cobra.Command{
 ![cobra](./docs/cobra-spinner.gif)
 
 ### Log & Progress
-Log info
 
-![log](./docs/log-progress.gif)
+[./examples/log/main.go](./examples/log/main.go)
+```go
+var logger *log.Logger = log.Default()
+
+func main() {
+	// Create and start the progress bar
+	program := glitter.NewProgram(progress.New()).GoRun()
+	defer program.QuitAndWait()
+
+    // Use a logger that works together with bubbletea
+    defer func(l *log.Logger) { logger = l }(logger)
+    logger = log.New(program, "", log.LstdFlags)
+
+	// Do work, log and increase progress bar
+	for i := 0; i <= 100; i++ {
+		time.Sleep(10 * time.Millisecond)
+		logger.Println("Started", i)
+		time.Sleep(10 * time.Millisecond)
+		logger.Println("Finished", i)
+		program.Send(float64(i) / 100)
+	}
+	logger.Println("Finished everything!")
+}
+```
+
+![log-progress](./docs/log-progress.gif)
+
+<details>
+    <summary>Without glitter</summary>
+
+![log-progress_no-glitter](./docs/log-progress_no-glitter.gif)
+
+</details>
 
 ### TODO Example with huh? prompt and Charm's Log
 

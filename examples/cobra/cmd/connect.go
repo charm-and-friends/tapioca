@@ -23,7 +23,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Create and run a spinner in the background
-		program := glitter.NewProgram(spinner.New()).GoRun()
+		program := glitter.NewProgram(spinner.New().Title("Connecting")).GoRun()
 		defer program.QuitAndWait() // Quit when command ends
 
 		// Set the command output to the program

@@ -4,6 +4,18 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
+// Handles common CLI signals like Ctrl+C for quitting.
+func HandleMessage(msg tea.Msg) tea.Cmd {
+	switch msg := msg.(type) {
+	case tea.KeyMsg:
+		switch msg.Type {
+		case tea.KeyCtrlC:
+			return tea.Quit
+		}
+	}
+	return nil
+}
+
 type ModelWrapper struct {
 	tea.Model
 }
@@ -13,14 +25,10 @@ func (m *ModelWrapper) Init() tea.Cmd {
 }
 
 func (m *ModelWrapper) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyMsg:
-		switch msg.Type {
-		case tea.KeyCtrlC:
-			return m, tea.Quit
-		}
+	cmd := HandleMessage(msg)
+	if cmd != nil {
+		return m, cmd
 	}
-	var cmd tea.Cmd
 	m.Model, cmd = m.Model.Update(msg)
 	return m, cmd
 }

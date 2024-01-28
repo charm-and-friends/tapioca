@@ -15,6 +15,10 @@ func (m Progress) Init() tea.Cmd {
 }
 
 func (m Progress) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	cmd := glitter.HandleMessage(msg)
+	if cmd != nil {
+		return m, cmd
+	}
 	switch msg := msg.(type) {
 	case float64:
 		return m, m.Model.SetPercent(msg)
@@ -32,6 +36,6 @@ func (m Progress) View() string {
 }
 
 // Creates a new Progress tea.Model.
-func New(opts ...progress.Option) tea.Model {
-	return glitter.WrapModel(&Progress{progress.New(opts...)})
+func New(opts ...progress.Option) *Progress {
+	return &Progress{progress.New(opts...)}
 }
