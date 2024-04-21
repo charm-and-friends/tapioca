@@ -1,6 +1,6 @@
 package main
 
-import "github.com/esdandreu/glitter/examples/cobra/cmd"
+import "examples/cobra/cmd"
 
 func main() {
 	cmd.Execute()

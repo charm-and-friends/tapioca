@@ -91,18 +91,28 @@ func main() {
 
 </details>
 
-### TODO Example with huh? prompt and Charm's Log
+### Charm's Log
 
-### TODO Example with zerolog
+[./examples/charmlog/main.go](./examples/charmlog/main.go)
+![charmlog](./docs/charmlog.gif)
 
-### Charm's Log & Prompt
+<details>
+    <summary>Without glitter</summary>
+
+![charmlog_no-glitter](./docs/charmlog_no-glitter.gif)
+
+</details>
 
 ## Pre-defined models
 Glitter extends [bubbles](https://github.com/charmbracelet/bubbles) with some
 pre-defined models for fast prototyping:
 
-- TODO: Progress with title and ETA.
-- TODO: Spinner with title.
+- Progress:
+  TODO:
+  - [ ] Title
+  - [ ] Spinner
+  - [ ] ETA
+- Spinner with title (similar to [charmbracelet/huh](https://github.com/charmbracelet/huh)'s)
 
 These models are usable out of the box and quit after pressing usual quit key
 combinations (`ctrl+C`/`cmd+C`). They are intended to cover basic dynamic
