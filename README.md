@@ -66,9 +66,9 @@ func main() {
 	program := glitter.NewProgram(progress.New()).GoRun()
 	defer program.QuitAndWait()
 
-    // Use a logger that works together with bubbletea
-    defer func(l *log.Logger) { logger = l }(logger)
-    logger = log.New(program, "", log.LstdFlags)
+	// Use a logger that works together with bubbletea
+	defer func(l *log.Logger) { logger = l }(logger)
+	logger = log.New(program, "", log.LstdFlags)
 
 	// Do work, log and increase progress bar
 	for i := 0; i <= 100; i++ {
