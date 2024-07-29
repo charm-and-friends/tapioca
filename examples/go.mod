@@ -10,7 +10,7 @@ replace github.com/esdandreu/tapioca/progress => ../progress
 
 require (
 	github.com/charmbracelet/log v0.4.0
-	github.com/esdandreu/tapioca v0.2.1-0.20240729194423-182daeeae099
+	github.com/esdandreu/tapioca v0.2.2
 	github.com/esdandreu/tapioca/progress v0.0.0
 	github.com/esdandreu/tapioca/spinner v0.0.0
 	github.com/spf13/cobra v1.8.1
