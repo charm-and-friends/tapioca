@@ -5,26 +5,26 @@ import (
 	"time"
 
 	"github.com/charmbracelet/log"
-	"github.com/esdandreu/glitter"
-	"github.com/esdandreu/glitter/spinner"
+	"github.com/esdandreu/tapioca"
+	"github.com/esdandreu/tapioca/spinner"
 )
 
 var logger *log.Logger = log.Default()
 
 func main() {
-	var noGlitter bool
-	flag.BoolVar(&noGlitter, "no-glitter", false, "Do not use glitter")
+	var notapioca bool
+	flag.BoolVar(&notapioca, "no-tapioca", false, "Do not use tapioca")
 	var verbose bool
 	flag.BoolVar(&verbose, "verbose", false, "Print debug logs")
 	flag.Parse()
 
 	// Create and run a spinner in the background
-	program := glitter.NewProgram(spinner.New().
+	program := tapioca.NewProgram(spinner.New().
 		Title("Work in progress"),
 	).GoRun()
 	defer program.QuitAndWait() // Quit when command ends
 
-	if !noGlitter {
+	if !notapioca {
 		// Use a logger that works together with bubbletea
 		defer func(l *log.Logger) { logger = l }(logger)
 		logger = log.New(program)

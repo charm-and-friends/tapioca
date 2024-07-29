@@ -2,18 +2,18 @@ module examples
 
 go 1.20
 
-replace github.com/esdandreu/glitter => ../
+replace github.com/esdandreu/tapioca => ../
 
-replace github.com/esdandreu/glitter/spinner => ../spinner
+replace github.com/esdandreu/tapioca/spinner => ../spinner
 
-replace github.com/esdandreu/glitter/progress => ../progress
+replace github.com/esdandreu/tapioca/progress => ../progress
 
 require (
 	github.com/charmbracelet/huh v0.3.0
 	github.com/charmbracelet/log v0.4.0
-	github.com/esdandreu/glitter v0.0.0-20240121210626-64099f3c0bf7
-	github.com/esdandreu/glitter/progress v0.0.0-00010101000000-000000000000
-	github.com/esdandreu/glitter/spinner v0.0.0-20240121210626-64099f3c0bf7
+	github.com/esdandreu/tapioca v0.0.0-20240121210626-64099f3c0bf7
+	github.com/esdandreu/tapioca/progress v0.0.0-00010101000000-000000000000
+	github.com/esdandreu/tapioca/spinner v0.0.0-20240121210626-64099f3c0bf7
 	github.com/spf13/cobra v1.8.0
 )
 

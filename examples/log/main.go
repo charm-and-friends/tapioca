@@ -5,22 +5,22 @@ import (
 	"log"
 	"time"
 
-	"github.com/esdandreu/glitter"
-	"github.com/esdandreu/glitter/progress"
+	"github.com/esdandreu/tapioca"
+	"github.com/esdandreu/tapioca/progress"
 )
 
 var logger *log.Logger = log.Default()
 
 func main() {
-	var noGlitter bool
-	flag.BoolVar(&noGlitter, "no-glitter", false, "Do not use glitter")
+	var notapioca bool
+	flag.BoolVar(&notapioca, "no-tapioca", false, "Do not use tapioca")
 	flag.Parse()
 
 	// Create and start the progress bar
-	program := glitter.NewProgram(progress.New()).GoRun()
+	program := tapioca.NewProgram(progress.New()).GoRun()
 	defer program.QuitAndWait()
 
-	if !noGlitter {
+	if !notapioca {
 		// Use a logger that works together with bubbletea
 		defer func(l *log.Logger) { logger = l }(logger)
 		logger = log.New(program, "", log.LstdFlags)

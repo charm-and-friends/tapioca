@@ -1,10 +1,10 @@
-module github.com/esdandreu/glitter
+module github.com/esdandreu/tapioca
 
 go 1.20
 
 require (
 	github.com/charmbracelet/bubbletea v0.25.0
-	github.com/esdandreu/glitter/spinner v0.0.0-20240121210626-64099f3c0bf7
+	github.com/esdandreu/tapioca/spinner v0.0.0-20240121210626-64099f3c0bf7
 	github.com/stretchr/testify v1.8.4
 )
 

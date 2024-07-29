@@ -1,4 +1,4 @@
-package glitter
+package tapioca
 
 import (
 	"bytes"

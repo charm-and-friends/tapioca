@@ -4,7 +4,7 @@ import (
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/esdandreu/glitter"
+	"github.com/esdandreu/tapioca"
 )
 
 // Wraps bubbles/spinner.Spinner in a way that it implements tea.Spinner
@@ -38,7 +38,7 @@ func (m Spinner) Init() tea.Cmd {
 }
 
 func (m Spinner) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	cmd := glitter.HandleMessage(msg)
+	cmd := tapioca.HandleMessage(msg)
 	if cmd != nil {
 		return m, cmd
 	}

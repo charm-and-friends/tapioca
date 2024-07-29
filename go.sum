@@ -10,8 +10,8 @@ github.com/containerd/console v1.0.4 h1:F2g4+oChYvBTsASRTz8NP6iIAi97J3TtSAsLbIFn
 github.com/containerd/console v1.0.4/go.mod h1:YynlIjWYF8myEu6sdkwKIvGQq+cOckRm6So2avqoYAk=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/esdandreu/glitter/spinner v0.0.0-20240121210626-64099f3c0bf7 h1:d0i1APuw/kNEnroQ3YI22fKkcWKNUTf1qUDUeZgMg0k=
-github.com/esdandreu/glitter/spinner v0.0.0-20240121210626-64099f3c0bf7/go.mod h1:D+CX/6rJMEMgyL5z19qPHRwGp5PIlmUfS91PXEJgpTo=
+github.com/esdandreu/tapioca/spinner v0.0.0-20240121210626-64099f3c0bf7 h1:d0i1APuw/kNEnroQ3YI22fKkcWKNUTf1qUDUeZgMg0k=
+github.com/esdandreu/tapioca/spinner v0.0.0-20240121210626-64099f3c0bf7/go.mod h1:D+CX/6rJMEMgyL5z19qPHRwGp5PIlmUfS91PXEJgpTo=
 github.com/lucasb-eyer/go-colorful v1.2.0 h1:1nnpGOrhyZZuNyfu1QjKiUICQ74+3FNCN69Aj6K7nkY=
 github.com/lucasb-eyer/go-colorful v1.2.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=

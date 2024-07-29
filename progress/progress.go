@@ -3,7 +3,7 @@ package progress
 import (
 	"github.com/charmbracelet/bubbles/progress"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/esdandreu/glitter"
+	"github.com/esdandreu/tapioca"
 )
 
 type Progress struct {
@@ -15,7 +15,7 @@ func (m Progress) Init() tea.Cmd {
 }
 
 func (m Progress) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	cmd := glitter.HandleMessage(msg)
+	cmd := tapioca.HandleMessage(msg)
 	if cmd != nil {
 		return m, cmd
 	}

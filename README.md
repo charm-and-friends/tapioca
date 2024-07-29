@@ -1,9 +1,13 @@
-# Glitter
+# tapioca
 
 Add dynamic [bubbbletea](https://github.com/charmbracelet/bubbletea)
-elements to existing Go applications.
+elements to existing Go applications. `tapioca` makes dynamic
+[bubbbletea](https://github.com/charmbracelet/bubbletea) models stay at the
+bottom of the terminal, unaffected by log messages, the same way that [tapioca
+pearls](https://en.wikipedia.org/wiki/Tapioca_pearl) stay at the bottom of 
+[bubble tea](https://en.wikipedia.org/wiki/Bubble_tea).
 
-## Why should you use Glitter?
+## Why should you use tapioca?
 
 - You have a useful application with a pragmatic command line interface. It
 doesn't matter if it is complex and uses
@@ -18,12 +22,12 @@ as it supports specifying it's output as an `io.Writer`.
 - You want to add some dynamic elements. A simple progress bar or something way
   more complex.
 
-Add some Glitter to your application! With all the flexibility of
+Add some tapioca to your application! With all the flexibility of
 [bubbbletea](https://github.com/charmbracelet/bubbletea) but without its
 complexity. As simple as two lines of code:
 
 ```go
-program := glitter.NewProgram(spinner.New()).GoRun()
+program := tapioca.NewProgram(spinner.New()).GoRun()
 defer program.QuitAndWait()
 ```
 
@@ -33,7 +37,7 @@ defer program.QuitAndWait()
 Long running commands often require logging some intermediate information to
 let users know that the program is running as expected. However, printing a
 bunch of debug logs does not look nice in an application. Spinners can make
-your application more user friendly and `glitter` integrates them painlessly
+your application more user friendly and `tapioca` integrates them painlessly
 with your `cobra` application.
 
 [./examples/cobra/cmd/connect.go](./examples/cobra/cmd/connect.go)
@@ -42,7 +46,7 @@ var connectCmd = &cobra.Command{
 	[...]
 	Run: func(cmd *cobra.Command, args []string) {
         // Create and run a spinner in the background
-		program := glitter.NewProgram(spinner.New()).GoRun()
+		program := tapioca.NewProgram(spinner.New()).GoRun()
 		defer program.QuitAndWait() // Quit when command ends
 
 		// Set the command output to the program
@@ -63,7 +67,7 @@ var logger *log.Logger = log.Default()
 
 func main() {
 	// Create and start the progress bar
-	program := glitter.NewProgram(progress.New()).GoRun()
+	program := tapioca.NewProgram(progress.New()).GoRun()
 	defer program.QuitAndWait()
 
 	// Use a logger that works together with bubbletea
@@ -85,9 +89,9 @@ func main() {
 ![log-progress](./docs/log-progress.gif)
 
 <details>
-    <summary>Without glitter</summary>
+    <summary>Without tapioca</summary>
 
-![log-progress_no-glitter](./docs/log-progress_no-glitter.gif)
+![log-progress_no-tapioca](./docs/log-progress_no-tapioca.gif)
 
 </details>
 
@@ -97,14 +101,14 @@ func main() {
 ![charmlog](./docs/charmlog.gif)
 
 <details>
-    <summary>Without glitter</summary>
+    <summary>Without tapioca</summary>
 
-![charmlog_no-glitter](./docs/charmlog_no-glitter.gif)
+![charmlog_no-tapioca](./docs/charmlog_no-tapioca.gif)
 
 </details>
 
 ## Pre-defined models
-Glitter extends [bubbles](https://github.com/charmbracelet/bubbles) with some
+tapioca extends [bubbles](https://github.com/charmbracelet/bubbles) with some
 pre-defined models for fast prototyping:
 
 - Progress:
