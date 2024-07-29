@@ -1,7 +1,7 @@
 # tapioca
 
 Add dynamic [bubbbletea](https://github.com/charmbracelet/bubbletea)
-elements to existing Go applications. `tapioca` makes dynamic
+elements to existing Go applications. `tapioca` makes
 [bubbbletea](https://github.com/charmbracelet/bubbletea) models stay at the
 bottom of the terminal, unaffected by log messages, the same way that [tapioca
 pearls](https://en.wikipedia.org/wiki/Tapioca_pearl) stay at the bottom of 
