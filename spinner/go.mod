@@ -2,6 +2,8 @@ module github.com/esdandreu/tapioca/spinner
 
 go 1.20
 
+replace github.com/esdandreu/tapioca => ../
+
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/bubbles v0.17.1 // indirect
@@ -9,7 +11,7 @@ require (
 	github.com/charmbracelet/harmonica v0.2.0 // indirect
 	github.com/charmbracelet/lipgloss v0.9.1 // indirect
 	github.com/containerd/console v1.0.4-0.20230313162750-1ae8d489ac81 // indirect
-	github.com/esdandreu/tapioca v0.0.0-20240121210626-64099f3c0bf7 // indirect
+	github.com/esdandreu/tapioca v0.2.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/mattn/go-localereader v0.0.1 // indirect
