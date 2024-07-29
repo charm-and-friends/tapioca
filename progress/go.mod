@@ -2,12 +2,10 @@ module github.com/esdandreu/tapioca/progress
 
 go 1.20
 
-replace github.com/esdandreu/tapioca => ../
-
 require (
 	github.com/charmbracelet/bubbles v0.18.0
 	github.com/charmbracelet/bubbletea v0.26.6
-	github.com/esdandreu/tapioca v0.2.0
+	github.com/esdandreu/tapioca v0.2.1-0.20240729194423-182daeeae099
 )
 
 require (

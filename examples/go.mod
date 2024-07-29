@@ -10,9 +10,9 @@ replace github.com/esdandreu/tapioca/progress => ../progress
 
 require (
 	github.com/charmbracelet/log v0.4.0
-	github.com/esdandreu/tapioca v0.2.0
-	github.com/esdandreu/tapioca/progress v0.2.0
-	github.com/esdandreu/tapioca/spinner v0.2.0
+	github.com/esdandreu/tapioca v0.2.1-0.20240729194423-182daeeae099
+	github.com/esdandreu/tapioca/progress v0.0.0
+	github.com/esdandreu/tapioca/spinner v0.0.0
 	github.com/spf13/cobra v1.8.1
 )
 
@@ -26,7 +26,6 @@ require (
 	github.com/charmbracelet/x/input v0.1.3 // indirect
 	github.com/charmbracelet/x/term v0.1.1 // indirect
 	github.com/charmbracelet/x/windows v0.1.2 // indirect
-	github.com/containerd/console v1.0.4 // indirect
 	github.com/erikgeiser/coninput v0.0.0-20211004153227-1c3628e74d0f // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
@@ -44,6 +43,5 @@ require (
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
 	golang.org/x/sync v0.7.0 // indirect
 	golang.org/x/sys v0.22.0 // indirect
-	golang.org/x/term v0.22.0 // indirect
 	golang.org/x/text v0.16.0 // indirect
 )
