@@ -45,7 +45,7 @@ with your `cobra` application.
 var connectCmd = &cobra.Command{
 	[...]
 	Run: func(cmd *cobra.Command, args []string) {
-        // Create and run a spinner in the background
+        	// Create and run a spinner in the background
 		program := tapioca.NewProgram(spinner.New()).GoRun()
 		defer program.QuitAndWait() // Quit when command ends
 
