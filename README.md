@@ -1,8 +1,8 @@
 # tapioca
 
-Add dynamic [bubbbletea](https://github.com/charmbracelet/bubbletea)
+Add dynamic [bubbletea](https://github.com/charmbracelet/bubbletea)
 elements to existing Go applications. `tapioca` makes
-[bubbbletea](https://github.com/charmbracelet/bubbletea) models stay at the
+[bubbletea](https://github.com/charmbracelet/bubbletea) models stay at the
 bottom of the terminal, unaffected by log messages, the same way that [tapioca
 pearls](https://en.wikipedia.org/wiki/Tapioca_pearl) stay at the bottom of 
 [bubble tea](https://en.wikipedia.org/wiki/Bubble_tea).
@@ -23,7 +23,7 @@ as it supports specifying it's output as an `io.Writer`.
   more complex.
 
 Add some tapioca to your application! With all the flexibility of
-[bubbbletea](https://github.com/charmbracelet/bubbletea) but without its
+[bubbletea](https://github.com/charmbracelet/bubbletea) but without its
 complexity. As simple as two lines of code:
 
 ```go
